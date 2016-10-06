@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mmahrous/multi-rest#readme",
   "dependencies": {
+    "file-extension": "^3.0.2",
     "fs-extra": "^0.30.0"
   }
 }
