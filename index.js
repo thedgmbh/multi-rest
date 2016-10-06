@@ -4,6 +4,7 @@ var upload = {};
 var options;
 
 upload = function (req, res, next) {
+	if (!req.files[options.filefield]) next();
 	var newPath = options.uploadDir + filename(req.files[options.filefield]) + '.' + fileExtension(req.files[options.filefield].name);
 	fs.move(req.files[options.filefield].path,  newPath , function (err) {
 		if (err) return console.error(err)
