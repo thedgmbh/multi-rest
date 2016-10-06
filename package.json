@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mmahrous/multi-rest/issues"
   },
-  "homepage": "https://github.com/mmahrous/multi-rest#readme"
+  "homepage": "https://github.com/mmahrous/multi-rest#readme",
+  "dependencies": {
+    "fs-extra": "^0.30.0"
+  }
 }
