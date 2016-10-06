@@ -1,0 +1,23 @@
+{
+  "name": "multi-rest",
+  "version": "1.0.0",
+  "description": "A middleware to handle multi-part request for restify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmahrous/multi-rest.git"
+  },
+  "keywords": [
+    "restify",
+    "multi-part"
+  ],
+  "author": "M.Mahrous <m.mahrous.94@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmahrous/multi-rest/issues"
+  },
+  "homepage": "https://github.com/mmahrous/multi-rest#readme"
+}
