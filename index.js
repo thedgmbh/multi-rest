@@ -7,7 +7,7 @@ upload = function (req, res, next) {
 	if (!req.files[options.filefield]) res.send({code: "ExternalError", messege: "Cannot read property '" + options.filefield + "' of undefined"})
 	var newPath = options.uploadDir + filename(req.files[options.filefield]) + '.' + fileExtension(req.files[options.filefield].name);
 	fs.move(req.files[options.filefield].path,  newPath , function (err) {
-		if (err) return console.error(err)
+		if (err) return res.send({code: "InternalError", messege: "Error happen while uploading."})
 		delete req.files[options.filefield].domain;
 		delete req.files[options.filefield]._writeStream;
 		delete req.files[options.filefield]._events;
