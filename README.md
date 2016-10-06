@@ -21,7 +21,7 @@ upload.options({uploadDir: "./uploads/", filename: 'random', filefield: 'image'}
 server.use(upload);
 
 server.post('/upload', function (req, res, next){
-	res.send({success: true, message: "file uploaded :)"}});
+	res.send({success: true, message: "file uploaded :)"});
 });
 
 server.listen(8080, function() {
