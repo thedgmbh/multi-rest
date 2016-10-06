@@ -4,7 +4,7 @@ var upload = {};
 var options;
 
 upload = function (req, res, next) {
-	fs.move(req.files[options.filefield].path, options.uploadDir + filename(req.files[options.filefield]) + fileExtension(req.files[options.filefield].name)  , function (err) {
+	fs.move(req.files[options.filefield].path, options.uploadDir + filename(req.files[options.filefield]) + '.' + fileExtension(req.files[options.filefield].name)  , function (err) {
 		if (err) return console.error(err)
 		delete req.files[options.filefield].domain;
 		delete req.files[options.filefield]._writeStream;
