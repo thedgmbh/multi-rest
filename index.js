@@ -5,8 +5,14 @@ var options;
 
 upload = function (req, res, next) {
 	fs.move(req.files[options.filefield].path, options.uploadDir + filename(req.files[options.filefield]) + fileExtension(req.files[options.filefield].name);  , function (err) {
-	  if (err) return console.error(err)
-	  next();
+		if (err) return console.error(err)
+		delete req.files[options.filefield].domain;
+		delete req.files[options.filefield]._writeStream;
+		delete req.files[options.filefield]._events;
+		delete req.files[options.filefield]._eventsCount;
+		delete req.files[options.filefield]._maxListeners;
+		req.files[options.filefield].path = options.uploadDir + filename(req.files[options.filefield]);
+		next();
 	})
 }
 
