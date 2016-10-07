@@ -16,7 +16,7 @@ const upload = require('multi-rest');
 
 var server = restify.createServer();
 
-upload.options({uploadDir: "./uploads/", filename: 'random', filefield: 'image'});
+upload.options({uploadDir: "./uploads/", filename: 'random', filefield: 'image', used: 'maybe'});
 
 server.post('/upload', upload ,function (req, res, next){
 	res.send({success: true, message: "file uploaded :)"});
