@@ -4,7 +4,7 @@
   "description": "A middleware to handle multi-part request for restify",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vows --spec"
   },
   "repository": {
     "type": "git",
