@@ -4,7 +4,8 @@
   "description": "A middleware to handle multi-part request for restify",
   "main": "index.js",
   "scripts": {
-    "test": "vows --spec"
+    "start": "node index",
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -12,7 +13,10 @@
   },
   "keywords": [
     "restify",
-    "multi-part"
+    "multi-part",
+    "upload",
+    "mulitparty",
+    "api",
   ],
   "author": "M.Mahrous <m.mahrous.94@gmail.com>",
   "license": "MIT",
