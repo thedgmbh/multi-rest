@@ -2,10 +2,10 @@
 
 > This package is in early stage.
 
-A middleware to handle multi-part request for restify, cause [restify](http://restify.com) body-parser is fucked up, and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request.
+A middleware to handle multi-part request for restify, cause [restify](http://restify.com) cause of body-parser isn't working as is should be (it doesn't work at all), and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request.
 
 
-Feel free to contact me [M. Mahrous](mailto:m.mahrous.94@gmail.com) and imporove the code.
+Feel free to contact me [M. Mahrous](mailto:m.mahrous.94@gmail.com) and improve the code.
 
 #### Example:
 
