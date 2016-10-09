@@ -7,7 +7,7 @@ function Upload(data){
 		moveFile(req.files, data,function(err, files){
 			if (err) return res.send(err);
 			req.files = files;
-			// next();
+			next();
 		});	
 	}
 }
