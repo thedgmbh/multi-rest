@@ -2,21 +2,31 @@
 
 > This package is in early stage.
 
-A middleware to handle multi-part request for restify, cause [restify](http://restify.com) cause of body-parser isn't working as is should be (it doesn't work at all), and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request.
+A middleware to handle multi-part request for restify, cause [restify](http://restify.com) cause of body-parser isn't working as is should be (it doesn't work at all), and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request, this module can handle diffrent file 
+
+## Features: 
+	- Path handler.
+	- Filenaming. 
+	- Upload more then one file in the same request. 
+	- Mondtory.
 
 
-Feel free to contact me [M. Mahrous](mailto:m.mahrous.94@gmail.com) and improve the code.
+## In progress 
+	- Handling multiable files under the same fieldname.
+	- Adding more naming convention.
+	- Alot more to make it convenit to upload.
+
 
 #### Example:
 
 ```javascript
 
 const restify = require('restify');
-const upload = require('multi-rest');
+const Multi = require('multi-rest');
 
 var server = restify.createServer();
 
-upload.options({uploadDir: "./uploads/", filename: 'random', filefield: 'image', used: 'maybe'});
+var upload = new Multi({uploadDir: "./uploads/", filename: 'random', filefields: ['image', 'icon'], used: 'maybe'});
 
 server.post('/upload', upload ,function (req, res, next){
 	res.send({success: true, message: "file uploaded :)"});
@@ -33,9 +43,29 @@ server.listen(8080, function() {
 
 #### File naming
 
-Right now it's only support random file naming, will add more later;
-
-
-
+##### Random 
+This use a Math.random library to create the file name
+```
+{ filename: 'random' }
+```
+##### Same name 
+This use the name of the uploaded file .
+```
+{ filename: 'same' }
+```
+##### Plus date
+This will add after the name of the uploaded file the timestamp when the file uploaded.
+```
+{ filename: 'plus_date' }
+```
+##### Date
+This use new Date() to create the file name (not prefeared when uploading more then one file)
+```
+{ filename: 'date' }
+```
 #### License
 Licensed under MIT
+
+#### Author
+M. Mahrous
+Feel free to contact me [M. Mahrous](mailto:m.mahrous.94@gmail.com) and improve the code.

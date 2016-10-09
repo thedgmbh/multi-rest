@@ -1,39 +1,70 @@
 const fs = require('fs-extra');
 const fileExtension = require('file-extension');
-var upload = {};
-var options;
 
-upload = function (req, res, next) {
-	if (typeof req.files[options.filefield] == 'undefined') {
-		if (options.used == "maybe") {
-			next()
-		} else if (options.used == "must") {
-			res.send({code: "ExternalError", messege: "Cannot read property '" + options.filefield + "' of undefined"});
-		}
-	}else {
-		var newPath = options.uploadDir + filename(req.files[options.filefield]) + '.' + fileExtension(req.files[options.filefield].name);
-		fs.move(req.files[options.filefield].path,  newPath , function (err) {
-			if (err) return res.send({code: "InternalError", messege: "Error happen while uploading."})
-			delete req.files[options.filefield].domain;
-			delete req.files[options.filefield]._writeStream;
-			delete req.files[options.filefield]._events;
-			delete req.files[options.filefield]._eventsCount;
-			delete req.files[options.filefield]._maxListeners;
-			req.files[options.filefield].path = newPath;
-			next();
-		})
+// constractor
+function Upload(data){
+	return function (req, res, next) {
+		moveFile(req.files, data,function(err, files){
+			if (err) return res.send(err);
+			req.files = files;
+			// next();
+		});	
 	}
 }
-
-upload.options = function (data) {
-	options = data;
-}
-
-function filename(options){
-	if (options.filename = 'random') {
-		return Math.random().toString(36).substring(7);
+// renaming the file
+function filename(name, options){
+	if (options.filename == "random") {
+		return Math.random().toString(36).substring(7) + '.' + fileExtension(name);
+	}else if (options.filename == "same") {
+		return name.replace(fileExtension(name), '') + fileExtension(name);
+	}else if (options.filename == "plus_date") {
+		return name.replace('.' + fileExtension(name), '') + '_' + new Date().toString().replace(/ /g, '_') + '.' + fileExtension(name);
 	} else {
-		Math.random().toString(36).substring(7);
+		return Math.random().toString(36).substring(7) + '.' + fileExtension(name);
 	}
 }
-module.exports = upload;
+// clean the file object from unwanted attributes 
+function restructure(file){
+	return {
+		path: file.path,
+		type: file.type, 
+		size: file.size,
+		name: file.name
+	};
+}
+// moving the files
+function moveFile(files, options, callback){
+	let l = 1;
+	// loop into the files array and move 
+	// the file to the the path that used want 
+	options.filefields.forEach(function(field) {
+		if (typeof files[field] == 'undefined') {
+			// check if the field is medtory or not
+			if (options.used == "maybe") {
+				next()
+			} else if (options.used == "must") {
+				return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
+			}
+		}else {
+		    var newPath = options.uploadDir + filename(files[field].name, options);
+			fs.move(files[field]
+				.path,  newPath , function (err) {
+				if (err) return callback({code: "InternalError", messege: "Error happen while uploading."}, null)
+				files[field].path = newPath;
+				files[field] = restructure(files[field]);
+				if (options.filefields.length == l) {
+					clean();
+				 	return callback(null, files);
+				}else{
+					l++;	
+				}
+			});	
+		}
+	});
+	
+}
+// cleaning unwanted file after handling the files
+function clean(){
+	fs.removeSync('./upload_*')
+}
+module.exports = Upload;
