@@ -6,7 +6,6 @@ function Upload(data){
 	return function (req, res, next) {
 		moveFile(req.files, data,function(err, files){
 			if (err) return res.send(err);
-			req.files = files;
 			next();
 		});	
 	}
@@ -47,13 +46,11 @@ function moveFile(files, options, callback){
 			}
 		}else {
 		    var newPath = options.uploadDir + filename(files[field].name, options);
-			fs.move(files[field]
-				.path,  newPath , function (err) {
+			fs.move(files[field].path,  newPath , function (err) {
 				if (err) return callback({code: "InternalError", messege: "Error happen while uploading."}, null)
 				files[field].path = newPath;
 				files[field] = restructure(files[field]);
 				if (options.filefields.length == l) {
-					clean();
 				 	return callback(null, files);
 				}else{
 					l++;	
@@ -62,9 +59,5 @@ function moveFile(files, options, callback){
 		}
 	});
 	
-}
-// cleaning unwanted file after handling the files
-function clean(){
-	fs.removeSync('./upload_*')
 }
 module.exports = Upload;
