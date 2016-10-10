@@ -17,6 +17,8 @@ A middleware to handle multi-part request for restify, cause [restify](http://re
 	- Alot more to make it convenit to upload.
 
 
+[![NPM](https://nodei.co/npm/multi-rest.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multi-rest/)
+
 #### Example:
 
 ```javascript
