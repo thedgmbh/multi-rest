@@ -42,7 +42,7 @@ function moveFile(files, options, callback){
 		if (typeof files[field] == 'undefined') {
 			// check if the field is medtory or not
 			if (options.used == "maybe") {
-				next()
+				callback(null, null)
 			} else if (options.used == "must") {
 				return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
 			}
