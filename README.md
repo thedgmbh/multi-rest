@@ -8,13 +8,12 @@ A middleware to handle multi-part request for restify, cause [restify](http://re
 	- Path handler.
 	- Filenaming. 
 	- Upload more then one file in the same request. 
-	- Mondtory.
-
+	- Thumbnails for images & videos.
 
 ## In progress 
-	- Handling multiable files under the same fieldname.
+	- Handling multiple files under the same fieldname.
 	- Adding more naming convention.
-	- Alot more to make it convenit to upload.
+	- ......
 
 
 [![NPM](https://nodei.co/npm/multi-rest.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multi-rest/)
