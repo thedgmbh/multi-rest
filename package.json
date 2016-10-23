@@ -1,6 +1,6 @@
 {
   "name": "multi-rest",
-  "version": "1.3.0",
+  "version": "1.3.0-1",
   "description": "A middleware to handle multi-part request for restify",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/mmahrous/multi-rest#readme",
   "dependencies": {
     "file-extension": "^3.0.2",
-    "fs-extra": "^0.30.0"
+    "fs-extra": "^0.30.0",
+    "thumbler": "^1.1.1-1"
   }
 }
