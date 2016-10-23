@@ -2,7 +2,7 @@
 
 const fs = require('fs-extra');
 const fileExtension = require('file-extension');
-
+const Thumbler = require('thumbler');
 // constractor
 function Upload(data){
 	return function (req, res, next) {
@@ -30,7 +30,8 @@ function restructure(file){
 		path: file.path,
 		type: file.type, 
 		size: file.size,
-		name: file.name
+		name: file.name,
+		thumbnail: file.thumbnail
 	};
 }
 // moving the files
@@ -38,11 +39,11 @@ function moveFile(files, options, callback){
 	let l = 1;
 	// loop into the files array and move 
 	// the file to the the path that used want 
-	options.filefields.forEach(function(field) {
+	options.filefields.forEach(function(field, index) {
 		if (typeof files[field] == 'undefined') {
 			// check if the field is medtory or not
 			if (options.used == "maybe") {
-				callback(null, null)
+				callback(null, null);
 			} else if (options.used == "must") {
 				return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
 			}
@@ -50,16 +51,38 @@ function moveFile(files, options, callback){
 		    var newPath = options.uploadDir + filename(files[field].name, options);
 			fs.move(files[field].path,  newPath , function (err) {
 				if (err) return callback({code: "InternalError", messege: "Error happen while uploading."}, null)
-				files[field].path = newPath;
-				files[field] = restructure(files[field]);
-				if (options.filefields.length == l) {
-				 	return callback(null, files);
-				}else{
-					l++;	
+				if (typeof(options.thumbnail) === 'object') {
+					thumbnail(newPath, options, function(err, path){
+						files[field].thumbnail = path;
+						files[field].path = newPath;
+						files[field] = restructure(files[field]);
+						if (options.filefields.length - 1 == index) {
+						 	return callback(null, files);
+						}
+					});
+				}else {
+					files[field].path = newPath;
+					files[field] = restructure(files[field]);	
+					if (options.filefields.length - 1 == index) {
+					 	return callback(null, files);
+					}
 				}
 			});	
 		}
 	});
-	
+}
+
+function thumbnail(path, options, callback){
+	fs.mkdirpSync(options.uploadDir+'thumbnails/');
+	Thumbler({
+		type: options.thumbnail.type, 
+		input: path,
+		output: options.uploadDir+'thumbnails/'+Math.random().toString(36).substring(7)+'.jpeg', 
+		time: '00:00:22',
+		size: options.thumbnail.size, 
+	}, function(err, path){
+	    if (err) return callback(err, null);
+	    return callback(null, path)
+	});
 }
 module.exports = Upload;
