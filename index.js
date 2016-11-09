@@ -78,7 +78,7 @@ function thumbnail(path, options, callback){
 		type: options.thumbnail.type, 
 		input: path,
 		output: options.uploadDir+'thumbnails/'+Math.random().toString(36).substring(7)+'.jpeg', 
-		time: '00:00:22',
+		time: '00:00:01',
 		size: options.thumbnail.size, 
 	}, function(err, path){
 	    if (err) return callback(err, null);
