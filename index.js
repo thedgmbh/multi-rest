@@ -40,7 +40,7 @@ function moveFile(files, options, callback){
 	// loop into the files array and move 
 	// the file to the the path that used want 
 	options.filefields.forEach(function(field, index) {
-		if (typeof files[field] == 'undefined') {
+		if (typeof(files) === 'undefined' || typeof(files[field]) === 'undefined') {
 			// check if the field is medtory or not
 			if (options.used == "maybe") {
 				callback(null, null);
