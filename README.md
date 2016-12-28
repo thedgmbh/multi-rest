@@ -27,7 +27,12 @@ const Multi = require('multi-rest');
 
 var server = restify.createServer();
 
-var upload = new Multi({uploadDir: "./uploads/", filename: 'random', filefields: ['image', 'icon'], used: 'maybe'});
+var upload = new Multi({uploadDir: "./uploads/", filename: 'random', filefields: ['image', 'icon'], thumbnail: {type: 'image', size: '300x200'}, used: 'maybe'});
+
+server.use(restify.acceptParser(server.acceptable));
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
+server.use(restify.CORS());
 
 server.post('/upload', upload ,function (req, res, next){
 	res.send({success: true, message: "file uploaded :)"});
