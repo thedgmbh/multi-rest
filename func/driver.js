@@ -21,7 +21,7 @@ driver.s3 = function (options, files, callback) {
 							f.thumbnail(files[field].path, options, function(err, path){
 								if (err) return callback(err, null)
 								if (path)
-									s3Put(s3, options.driver.bucketName, path, path, null, function(err, done){
+									s3Put(s3, options.driver.bucketName, path, path, mime.lookup(path), function(err, done){
 										if (err) return callback(err, null)
 										if (done)
 											f.clean([files[field].path, path]); // remove files from tmp disk
@@ -76,9 +76,9 @@ driver.disk = function (options, files, callback) {
 
 // private function to upload to s3
 function s3Put(s3, bucketName, key, file, type, callback){
-	let params = {Bucket: bucketName, Key: key, ContentType: type || mime.lookup(file), Body: fs.createReadStream(file)};
+	let params = {Bucket: bucketName, Key: key, ContentType: type, Body: fs.createReadStream(file)};
 	s3.putObject(params, function(err, data) {
-		if (err) return callback({code: "InternalError", messege: "Error happen while uploading."}, null)
+		if (err) return callback(err, null)
 		if (data) return callback(null, true);	
 	});
 }
