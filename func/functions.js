@@ -9,14 +9,18 @@ const f = {};
 
 f.check = function check(files, field, options, callback) {
 	if (typeof(files) === 'undefined' || typeof(files[field]) === 'undefined') {
-		// check if the field is medtory or not
+		// check if the field is mendtory or not
 		if (options.used == "maybe") {
 			return callback(null, false);
 		} else if (options.used == "must") {
 			return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
 		}
 	}else {
-		return callback(null, true);
+		if (options.extensions && !options.extensions.includes(fileExtension(files[field].name))) {
+			return callback({code: "ExternalError", messege: "Please upload file with allowed extensions."}, null)
+		} else {
+			return callback(null, true);	
+		}
 	}
 }
 
