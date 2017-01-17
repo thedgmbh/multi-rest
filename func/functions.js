@@ -30,7 +30,7 @@ f.thumbnail =function (path, options, callback){
 		type: options.thumbnail.type, 
 		input: path,
 		output: options.uploadDir+'thumbnails/'+uuid.v4()+'.jpeg', 
-		time: '00:00:01',
+		time: options.thumbnail.time || '00:00:01',
 		size: options.thumbnail.size, 
 	}, function(err, path){
 	    if (err) return callback(err, null);
