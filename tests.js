@@ -18,7 +18,7 @@ var upload_s3 = new Multi({driver: { type: 's3',
 						endpoint: 's3-accelerate.amazonaws.com', 
 						signatureVersion: 'v4', 
 						region: 'eu-central-1', 
-						bucketName: 'cuju-media'
+						bucketName: 'bucketName'
 					}, 
 					uploadDir: "uploads/", 
 					filename: 'random', 
