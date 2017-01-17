@@ -1,6 +1,6 @@
 {
   "name": "multi-rest",
-  "version": "1.3.2-1",
+  "version": "1.4.0",
   "description": "A middleware to handle multi-part request for restify",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,10 @@
     "multi-part",
     "upload",
     "mulitparty",
-    "api"
+    "api",
+    "s3",
+    "aws",
+    "amazon"
   ],
   "author": "M.Mahrous <m.mahrous.94@gmail.com>",
   "license": "MIT",
@@ -25,8 +28,11 @@
   },
   "homepage": "https://github.com/mmahrous/multi-rest#readme",
   "dependencies": {
+    "aws-sdk": "^2.7.22",
     "file-extension": "^3.0.2",
     "fs-extra": "^0.30.0",
-    "thumbler": "^1.1.1-1"
+    "mime": "^1.3.4",
+    "thumbler": "^1.1.1-1",
+    "uuid": "^3.0.1"
   }
 }
