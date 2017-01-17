@@ -1,5 +1,7 @@
 # Multi Rest v1.4
 
+> version v1.4 has a back compatibility with old version but prefered to update
+
 Multi rest is a swiss knife for handling multi-part requests for [restify](http://restify.com) , and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request, this module can handle diffrent file and process them.
 
 ## Features: 
