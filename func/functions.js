@@ -4,6 +4,7 @@ const fileExtension = require('file-extension');
 const Thumbler = require('thumbler');
 const uuid = require('uuid');
 const fs = require('fs-extra');
+const mime = require('mime');
 
 const f = {};
 
@@ -16,7 +17,7 @@ f.check = function check(files, field, options, callback) {
 			return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
 		}
 	}else {
-		if (options.extensions && !options.extensions.includes(fileExtension(files[field].name))) {
+		if (options.extensions && !options.extensions.includes(mime.extension(files[field].type))) {
 			return callback({code: "ExternalError", messege: "Please upload file with allowed extensions."}, null)
 		} else {
 			return callback(null, true);	
