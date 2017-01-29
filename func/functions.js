@@ -17,7 +17,7 @@ f.check = function check(files, field, options, callback) {
 			return callback({code: "ExternalError", messege: "Cannot read property '" + field + "' of undefined"}, null)
 		}
 	}else {
-		if (options.extensions && !options.extensions.includes(mime.extension(files[field].type))) {
+		if (options.extensions && !options.extensions.includes(mime.extension(files[field].type) || files[field].type.split("/")[1])) {
 			return callback({code: "ExternalError", messege: "Please upload file with allowed extensions."}, null)
 		} else {
 			return callback(null, true);	
