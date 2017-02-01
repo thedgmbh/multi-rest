@@ -43,13 +43,13 @@ f.thumbnail =function (path, options, callback){
 // renaming the file
 f.filename = function (name, options){
 	if (options.filename == "random") {
-		return uuid.v4() + '.' + fileExtension(name);
+		return uuid.v4() + '.' + (mime.extension(files[field].type) || files[field].type.split("/")[1]);
 	}else if (options.filename == "same") {
-		return name.replace(fileExtension(name), '') + fileExtension(name);
+		return name.replace(fileExtension(name), '') + (mime.extension(files[field].type) || files[field].type.split("/")[1]);
 	}else if (options.filename == "plus_date") {
-		return name.replace('.' + fileExtension(name), '') + '_' + new Date().toString().replace(/ /g, '_') + '.' + fileExtension(name);
+		return name.replace('.' + fileExtension(name), '') + '_' + new Date().toString().replace(/ /g, '_') + '.' + (mime.extension(files[field].type) || files[field].type.split("/")[1]);
 	} else {
-		return uuid.v4() + '.' + fileExtension(name);
+		return uuid.v4() + '.' + (mime.extension(files[field].type) || files[field].type.split("/")[1]);
 	}
 }
 
