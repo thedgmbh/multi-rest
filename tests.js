@@ -19,8 +19,8 @@ var upload_disk = new Multi({
 							        video: {
 							            type: 'video',
 							            thumbnail: {
-							            	height: 100,
-							            	time: ['00:01:03'],
+							            	width: 100,
+							            	time: ['10%'],
 							            	count: 1
 							            },
 							            required: false,
@@ -44,7 +44,7 @@ var upload_s3 = new Multi({
 						        endpoint: 's3-accelerate.amazonaws.com',
 						        signatureVersion: 'v4',
 						        region: 'eu-central-1',
-						        bucketName: 'bucketName',
+						        bucketName: 'cuju-cdn-test',
 						        path: ''
 						    },
 						    filename: (name) => { // the extention will be added automaticlly 
@@ -55,8 +55,8 @@ var upload_s3 = new Multi({
 						            type: 'video',
 						            thumbnail: {
 						                height: 100,
-						                time: ['00:01:03'],
-						                count: 1
+						                time: ['10%', '40%'],
+						                count: 2
 						            },
 						            required: false,
 						            extensions: ['mp4']
