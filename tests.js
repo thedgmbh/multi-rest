@@ -44,7 +44,7 @@ var upload_s3 = new Multi({
 						        endpoint: 's3-accelerate.amazonaws.com',
 						        signatureVersion: 'v4',
 						        region: 'eu-central-1',
-						        bucketName: 'cuju-cdn-test',
+						        bucketName: '',
 						        path: ''
 						    },
 						    filename: (name) => { // the extention will be added automaticlly 
