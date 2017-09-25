@@ -1,8 +1,8 @@
 # Multi Rest v2
 
-Multi rest is a swiss knife for handling multi-part requests for [restify](http://restify.com) , and as all nodejs framework is use http server at the end so I built this as if I'm dealing with http request, this module can handle diffrent file and process them.
+Multi rest is a swiss knife for handling multi-part requests for [restify](http://restify.com), and as all Node.js frameworks use HTTP server at the end so I built this dealing with HTTP requests, this module can handle diffrent files and process them.
 
-| version 2 is reveived huge update from the last version with the thumbnails for images and videos 
+| version 2 is received huge update from the last version with the thumbnails for images and videos 
 
 ## Features: 
 	- Path handler.
@@ -25,38 +25,40 @@ Multi rest is a swiss knife for handling multi-part requests for [restify](http:
 
 const restify = require('restify');
 const Multi = require('multi-rest');
+const uuid = require('uuid');
 
 var server = restify.createServer();
 
-var upload_disk = new Multi({  driver: {
-									type: 'local',
-									path: "./uploads/" 
-								},	
-								filename: (name) => { // the extention will be added automaticlly 
-									return uuid.v4();
-								}, 
-							    filefields: {
-							        video: {
-							            type: 'video',
-							            thumbnail: {
-							            	width: 100,
-							            	time: ['10%'],
-							            	count: 1
-							            },
-							            required: false,
-							            extensions: ['mp4']
-							        },
-							        image: {
-							            type: 'picture',
-							            thumbnail: {
-							            	width: 400,
-							            	height: 300
-							            },
-							            required: false,
-							            extensions: ['png', 'jpg']
-							        }
-							    },
-							});
+var upload_disk = new Multi({
+    driver: {
+        type: 'local',
+        path: "./uploads/"
+    },
+    filename: (name) => { // the extention will be added automaticlly 
+        return uuid.v4();
+    },
+    filefields: {
+        video: {
+            type: 'video',
+            thumbnail: {
+                width: 100,
+                time: ['10%'],
+                count: 1
+            },
+            required: false,
+            extensions: ['mp4']
+        },
+        image: {
+            type: 'picture',
+            thumbnail: {
+                width: 400,
+                height: 300
+            },
+            required: false,
+            extensions: ['png', 'jpg']
+        }
+    }
+});
 
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
@@ -92,43 +94,44 @@ aws_secret_access_key = your_secret_key
 
 const restify = require('restify');
 const Multi = require('multi-rest');
+const uuid = require('uuid');
 
 var server = restify.createServer();
 
 var upload_s3 = new Multi({
-						    driver: {
-						        type: 's3',
-						        endpoint: 's3-accelerate.amazonaws.com',
-						        signatureVersion: 'v4',
-						        region: 'eu-central-1',
-						        bucketName: 'test',
-						        path: ''
-						    },
-						    filename: (name) => { // the extention will be added automaticlly 
-						        return uuid.v4();
-						    },
-						    filefields: {
-						        video: {
-						            type: 'video',
-						            thumbnail: {
-						                height: 100,
-						                time: ['10%', '40%'],
-						                count: 2
-						            },
-						            required: false,
-						            extensions: ['mp4']
-						        },
-						        image: {
-						            type: 'picture',
-						            thumbnail: {
-						                width: 400,
-						                height: 300
-						            },
-						            required: false,
-						            extensions: ['png', 'jpg']
-						        }
-						    },
-						});
+    driver: {
+        type: 's3',
+        endpoint: 's3-accelerate.amazonaws.com',
+        signatureVersion: 'v4',
+        region: 'eu-central-1',
+        bucketName: 'test',
+        path: ''
+    },
+    filename: (name) => { // the extention will be added automaticlly 
+        return uuid.v4();
+    },
+    filefields: {
+        video: {
+            type: 'video',
+            thumbnail: {
+                height: 100,
+                time: ['10%', '40%'],
+                count: 2
+            },
+            required: false,
+            extensions: ['mp4']
+        },
+        image: {
+            type: 'picture',
+            thumbnail: {
+                width: 400,
+                height: 300
+            },
+            required: false,
+            extensions: ['png', 'jpg']
+        }
+    }
+});
 
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
@@ -148,29 +151,29 @@ server.listen(8080, function() {
 #### File naming
 
 ##### Random 
-This use a uuid v4 library to create the file name
-```
+This uses a `uuid` v4 library to create the file name
+```javascript
 function (name) { 
     return uuid.v4();
 }
 ```
 ##### Same name 
-This use the name of the uploaded file .
-```
+This uses the name of the uploaded file .
+```javascript
 function (name) { 
     return name;
 }
 ```
 ##### Plus date
-This will add after the name of the uploaded file the timestamp when the file uploaded.
-```
+This will add file upload timestamp after the file name.
+```javascript
 function (name) { 
     return name + new Date();
 }
 ```
 ##### Date
-This use new Date() to create the file name (not prefeared when uploading more then one file)
-```
+This use `new Date()` to create the file name (not prefered when uploading more then one file)
+```javascript
 function (name) { 
     return new Date();
 }
@@ -179,5 +182,5 @@ function (name) {
 Licensed under MIT
 
 #### Author
-M. Mahrous developed at [TheD. GmBH](https://thed.io)
+M. Mahrous developed at [The D. GmbH](https://thed.io)
 Feel free to contact me [M. Mahrous](mailto:m.mahrous.94@gmail.com) and improve the code.
