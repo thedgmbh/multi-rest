@@ -1,6 +1,6 @@
 # Multi Rest v2
 
-Multi rest is a swiss knife for handling multi-part requests for [restify](http://restify.com) , and as all Node.js frameworks use HTTP server at the end so I built this dealing with HTTP requests, this module can handle diffrent files and process them.
+Multi rest is a swiss knife for handling multi-part requests for [restify](http://restify.com), and as all Node.js frameworks use HTTP server at the end so I built this dealing with HTTP requests, this module can handle diffrent files and process them.
 
 | version 2 is received huge update from the last version with the thumbnails for images and videos 
 
