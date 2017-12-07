@@ -1,6 +1,6 @@
 {
   "name": "multi-rest",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A middleware to handle multi-part request for restify",
   "main": "index.js",
   "scripts": {
@@ -28,16 +28,16 @@
   },
   "homepage": "https://github.com/thedgmbh/multi-rest#readme",
   "dependencies": {
-    "@ffmpeg-installer/ffmpeg": "^1.0.12",
-    "@ffprobe-installer/ffprobe": "^1.0.8",
-    "async": "^2.5.0",
-    "aws-sdk": "^2.117.0",
-    "fluent-ffmpeg": "^2.1.2",
-    "fs-extra": "^0.30.0",
-    "imagemagick": "^0.1.3",
-    "lodash": "^4.17.4",
-    "restify": "^5.2.0",
-    "restify-errors": "^5.0.0",
-    "uuid": "^3.0.1"
+    "@ffmpeg-installer/ffmpeg": "1.0.12",
+    "@ffprobe-installer/ffprobe": "1.0.8",
+    "async": "2.5.0",
+    "aws-sdk": "2.117.0",
+    "fluent-ffmpeg": "2.1.2",
+    "fs-extra": "0.30.0",
+    "imagemagick": "0.1.3",
+    "lodash": "4.17.4",
+    "restify": "5.2.0",
+    "restify-errors": "5.0.0",
+    "uuid": "3.0.1"
   }
 }
