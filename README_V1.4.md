@@ -130,5 +130,5 @@ This use new Date() to create the file name (not prefeared when uploading more t
 Licensed under MIT
 
 #### Author
-M. Mahrous
+M. Mahrous developed at [The D. GmbH](https://thed.io)
 Feel free to contact me [M. Mahrous](mailto:m.mahrous@thed.io) and improve the code.
